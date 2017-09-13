@@ -1,0 +1,143 @@
+---
+title: "Plots"
+author: "LNass"
+date: "September 11, 2017"
+output: html_document
+---
+
+Index Swapping
+========================================
+
+Code included for first two plots, then suppressed for following 6.
+
+Forward Read (R1)
+---------------------------------------
+
+R1 base pair QS
+
+```{r read in R1 bpQS}
+R1bpQS = read.table("R1bpQS")
+R1bpQS <- cbind(R1bpQS, "Position"=1:nrow(R1bpQS))
+plot(R1bpQS$Position,R1bpQS$V1,
+     xlab="Base Pair Position",
+     ylab="Quality Score",
+     main="Forward Read(R1) per Base Pair Quality Score",
+     col="blue",pch=19)
+```
+
+R1 average reads QS
+
+```{r R1ReadQS}
+R1readQS = read.table("R1readQS")
+plot(R1readQS$V1,(R1readQS$V2),
+     xlab="Average Read Quality Score Bins",
+     ylab="Number of Reads Observed",
+     main="Forward Read(R1) Frequency of Observed Average Read Quality Score",
+     col = "red", pch=15)
+```
+
+Forward Index(R2)
+-------------------------------------
+
+R2 base pair QS
+
+```{r echo=FALSE}
+R2bpQS = read.table("R2bpQS")
+R2bpQS <- cbind(R2bpQS, "Position"=1:nrow(R2bpQS))
+
+plot(R2bpQS$Position,R2bpQS$V1,
+     xlab="Base Pair Position",
+     ylab="Quality Score",
+     main="Forward Index(R2) per Base Pair Quality Score",
+     col="blue",pch=19)
+
+```
+
+R2 average reads QS
+
+```{r echo=FALSE}
+R2readQS = read.table("test2")
+plot(R2readQS$V1,log2(R2readQS$V2),
+     xlab="Average Read Quality Score Bins",
+     ylab="Number of Reads Observed (log2 scale)",
+     main="Forward Index(R2) Frequency of Observed Average Read Quality Score",
+     col = "red", pch=15)
+```
+
+Reverse Index(R3)
+--------------------------------
+
+R3 base pair QS
+
+```{r echo=FALSE}
+R3bpQS = read.table("R3bpQS")
+R3bpQS <- cbind(R3bpQS, "Position"=1:nrow(R3bpQS))
+
+plot(R3bpQS$Position,R3bpQS$V1,
+     xlab="Base Pair Position",
+     ylab="Quality Score",
+     main="Reverse Index(R3) per Base Pair Quality Score",
+     col="blue", pch=19)
+```
+
+R3 average reads QS
+
+```{r echo=FALSE}
+R3readQS = read.table("R3readQS")
+plot(R3readQS$V1,log2(R3readQS$V2),
+     xlab="Average Read Quality Score Bins",
+     ylab="Number of Reads Observed (log2 scale)",
+     main="Reverse Index (R3) Frequency of Observed Average Read Quality Score",
+     col = "red", pch=15)
+```
+
+Reverse Read (R4)
+--------------------------
+
+R4 base pair QS
+
+```{r echo=FALSE}
+R4bpQS = read.table("R4bpQS")
+R4bpQS <- cbind(R4bpQS, "Position"=1:nrow(R4bpQS))
+
+plot(R4bpQS$Position,R4bpQS$V1,
+     xlab="Base Pair Position",
+     ylab="Quality Score",
+     main="Reverse Read(R4) per Base Pair Quality Score",
+     col="blue", pch=19)
+```
+
+R4 average reads QS
+
+```{r echo=FALSE}
+R4readQS = read.table("R4readQS")
+plot(R4readQS$V1,(R4readQS$V2),
+     xlab="Average Read Quality Score Bins",
+     ylab="Number of Reads Observed",
+     main="Reverse Reads (R4) Frequency of Observed Average Read Quality Score",
+     col = "red", pch=15)
+```
+
+
+Proper Indexes
+-------------------------------------------
+
+Proper Index Pairs
+```{r Proper Indexes}
+library("pander")
+ProperIndexes = read.table("ProperIndexPairsDic",col.names = c("Index","Count"))
+TotalProper = sum(ProperIndexes$Count)
+ProperIndexes$Percent = (ProperIndexes$Count/TotalProper)*100
+pander(ProperIndexes)
+```
+
+Index Swapping
+-------------------------------------------
+
+Index Swapping Observed
+```{r IndexHopping}
+IndexHop = read.table("IndexHoppingDic", col.names = c("Index_Pair","Counts"))
+TotalIndexHop = sum(IndexHop$Counts)
+IndexHop$Percent = (IndexHop$Counts/TotalIndexHop)*100
+pander(IndexHop)
+```
